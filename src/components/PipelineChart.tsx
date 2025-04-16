@@ -43,12 +43,10 @@ const PipelineChart = ({ data, type, winRate }: PipelineChartProps) => {
       .domain(data.map(d => d.label))
       .range([0, height])
       .padding(0.3);
-      // console.log(y)
 
     const x = d3.scaleLinear()
       .domain([0, type === 'count' ? d3.max(data, d => d.count)! : d3.max(data, d => d.acv)!])
       .range([0, width]);
-      // console.log(x)
 
     // Draw background bars
     svg.selectAll('.bar-bg')
@@ -71,7 +69,7 @@ const PipelineChart = ({ data, type, winRate }: PipelineChartProps) => {
       .append('rect')
       .attr('class', 'bar')
       .attr('y', d => y(d.label)!)
-      .attr('x', d => (width - x(type === 'count' ? d.count : d.acv)) / 2) // Center the bar horizontally
+      .attr('x', d => (width - x(type === 'count' ? d.count : d.acv)) / 2) 
       .attr('height', y.bandwidth())
       .attr('width', d => x(type === 'count' ? d.count : d.acv))
       .attr('fill', '#4CAF50')
@@ -87,7 +85,6 @@ const PipelineChart = ({ data, type, winRate }: PipelineChartProps) => {
       .attr('class', 'stage-label')
       .attr('y', d => y(d.label)! + y.bandwidth() / 2)
       .attr('x', isMobile ? 0 : -60)
-      // .attr('dy', '.35em')
       .style('font-size', '14px')
       .attr('fill', '#374151')
       .text(d => d.label);
@@ -99,11 +96,10 @@ const PipelineChart = ({ data, type, winRate }: PipelineChartProps) => {
       .append('text')
       .attr('class', 'value-label')
       .attr('y', d => y(d.label)! + y.bandwidth() / 2)
-      .attr('x', d => (width - x(type === 'count' ? d.count : d.acv)) / 2 + x(type === 'count' ? d.count : d.acv) / 2) // Center the label within the green bar
-      .attr('dy', '.35em')
+      .attr('x', d => (width - x(type === 'count' ? d.count : d.acv)) / 2 + x(type === 'count' ? d.count : d.acv) / 2)
       .style('font-size', '14px')
-      .attr('fill', '#ffffff') // White text for better contrast
-      .style('text-anchor', 'middle') // Center align the text
+      .attr('fill', '#ffffff') 
+      .style('text-anchor', 'middle') 
       .text(d => type === 'count' ? d.count : `$${d.acv.toLocaleString()}`);
 
     // Add percentage labels below bars

@@ -38,50 +38,21 @@ const PipelineTable = ({ data, type }: PipelineTableProps) => {
         <TableBody>
           {data.map((stage) => (
             <TableRow key={stage.label}>
-              <TableCell sx={{ 
-                  fontWeight: stage.label === 'Won' ? 500 : 400,
-                  bgcolor: stage.label === 'Won' ? '#f5f5f5' : 'transparent'}}>
+              <TableCell sx={{fontWeight: stage.label === 'Won' ? 500 : 400}}>
                 {stage.label}
               </TableCell>
               <TableCell align="right" sx={{ 
                   fontWeight: stage.label === 'Won' ? 500 : 400,
                   bgcolor: stage.label === 'Won' ? '#2e7d32' : 'transparent'
-                }}
-              >
-                {type === 'count' 
-                  ? stage.count.toLocaleString()
-                  : `$${stage.acv.toLocaleString()}`}
+                }}>{type === 'count' ? stage.count.toLocaleString(): `$${stage.acv.toLocaleString()}`}
               </TableCell>
-              <TableCell 
-                align="right"
-                sx={{ 
-                  color: '#d32f2f',
-                  bgcolor: stage.label === 'Won' ? '#f5f5f5' : 'transparent'
-                }}
-              >
-                {type === 'count'
-                  ? stage.lostCount.toLocaleString()
-                  : `$${stage.lostACV.toLocaleString()}`}
+              <TableCell align="right" sx={{color: '#d32f2f'}}>
+                {type === 'count'? stage.lostCount.toLocaleString(): `$${stage.lostACV.toLocaleString()}`}
               </TableCell>
-              <TableCell 
-                align="right"
-                sx={{ 
-                  color: '#2e7d32',
-                  bgcolor: stage.label === 'Won' ? '#f5f5f5' : 'transparent'
-                }}
-              >
-                {type === 'count'
-                  ? stage.movedToNextCount.toLocaleString()
-                  : `$${stage.movedToNextACV.toLocaleString()}`}
+              <TableCell align="right"  sx={{ color: '#2e7d32'}}>
+                {type === 'count' ? stage.movedToNextCount.toLocaleString() : `$${stage.movedToNextACV.toLocaleString()}`}
               </TableCell>
-              <TableCell align="right"
-                sx={{fontWeight:400,
-                  bgcolor: stage.label === 'Won' ? '#f5f5f5' : 'transparent'
-                }}
-              >
-                {type === 'count'
-                  ? stage.winRateByCount
-                  : stage.winRateByACV}
+              <TableCell align="right" sx={{fontWeight:400}}>{type === 'count'? stage.winRateByCount: stage.winRateByACV}
               </TableCell>
             </TableRow>
           ))}
